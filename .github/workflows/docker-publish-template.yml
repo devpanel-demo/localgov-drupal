@@ -59,6 +59,7 @@ jobs:
         docker exec ${{ job.services.webserver.id }} bash -c "sudo rm -rf \$APP_ROOT && sudo mkdir -p \$APP_ROOT"
         docker exec ${{ job.services.webserver.id }} bash -c "sudo cp -r /app/. \$APP_ROOT/." 
         docker exec ${{ job.services.webserver.id }} bash -c "sudo chown -R www:www \$APP_ROOT && chmod +x \$APP_ROOT/.devpanel/init-container.sh"
+        docker exec ${{ job.services.webserver.id }} bash -c "cd \$APP_ROOT && rm -rf .git"
         docker exec ${{ job.services.webserver.id }} bash -c "export && cd \$APP_ROOT && ls -al"
         echo "INSTALL CUSTOM PACKAGE"
         docker exec ${{ job.services.webserver.id }} bash -c "cd \$APP_ROOT && bash .devpanel/custom_package_installer.sh"
